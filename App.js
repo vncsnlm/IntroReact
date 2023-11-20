@@ -1,25 +1,27 @@
-import { Button, StatusBar, StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import {SafeAreaView} from 'react-native';
+import ToDoList from './ToDoList';
+import ToDoForm from './ToDoForm';
 
-export default function App() {
+
+function App() {
+  const [tasks, setTasks] = useState([
+    'Do laundry',
+    'Go to the gym',
+    'Walk the dog'
+  ]);
+
+  const addTask = (taskText) => {
+    setTasks([...tasks, taskText]);
+  };
+
+
   return (
-    <View style={styles.container}>
-      <Text>Welcome to React Native!</Text>
-      <Button
-        title="Press me"
-        onPress={() => {
-          // Handle button press
-        }}
-      />
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <ToDoList tasks={tasks} />
+      <ToDoForm addTask={addTask} />
+    </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0f0',  
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
